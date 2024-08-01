@@ -1,5 +1,6 @@
 # Import python packages
 import streamlit as st
+import requests
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
@@ -25,6 +26,8 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT
 
 ingredient_list= st.multiselect("Choose up to 5 ingredients:", my_dataframe, max_selections=5)
 
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+fruityvice_response.text()
 
 
 if ingredient_list:
